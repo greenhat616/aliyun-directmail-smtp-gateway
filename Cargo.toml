@@ -1,4 +1,5 @@
 [workspace]
-members = [
+resolver = "3"
+members = ["aliyun-directmail-smtp-gateway",
     "aliyun-dm-sdk",
 ]
