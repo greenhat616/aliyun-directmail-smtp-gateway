@@ -1,0 +1,6 @@
+/target
+external/
+
+# tooling caches
+/.claude/
+/.serena/
