@@ -11,12 +11,27 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
+  # ---- create the GitHub Release first -------------------------------------
+  # upload-rust-binary-action uploads into an EXISTING release; without this the
+  # parallel matrix jobs all fail with "release not found".
+  create-release:
+    name: create release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: taiki-e/create-gh-release-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
   # ---- cross-platform binaries -> GitHub Release ---------------------------
   binaries:
     name: ${{ matrix.target }}
+    needs: create-release
     runs-on: ${{ matrix.os }}
     permissions:
-      contents: write # create the release and upload assets
+      contents: write # upload assets to the release
     strategy:
       fail-fast: false
       matrix:
