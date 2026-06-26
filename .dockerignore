@@ -1,0 +1,14 @@
+# Build artifacts and vendored/tooling dirs — never needed inside the image.
+target/
+external/
+.git/
+.github/
+.claude/
+.serena/
+
+# Docs / local files
+*.md
+LICENSE*
+.gitignore
+.dockerignore
+Dockerfile
